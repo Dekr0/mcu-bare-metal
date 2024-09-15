@@ -36,3 +36,13 @@ signal at a specific signal strength.
 - Usually, the data bit will not be right at the cycle starts because the data bit 
 can be unstable. Instead, for each data bit, it will be saved in the middle of the 
 a signal pulse.
+
+## Side note
+
+- To see which serial port is being used to communicate with a MCU via UART, 
+try `dmesg | grep tty`.
+- To see the output or interact with STM32 board that communicates via UART, 
+some boards might have their output and interaction handle by builtin ST-LINK 
+virtual port. Check board data sheet / manual about UART.
+    - For example, STM32L432KC has a builtin ST-LINK. Its port might be named 
+    `/dev/ttyACM0` on Arch.
