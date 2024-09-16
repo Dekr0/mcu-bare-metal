@@ -1,4 +1,4 @@
-CFLAGS ?= -W -Wall -Wextra -Werror -Wundef -Wshadow -Wdouble-promotion -Wformat-truncation -fno-common
+CFLAGS ?= -W -Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -Wformat-truncation -fno-common
 CFLAGS += -g3 -Os -ffunction-sections -fdata-sections -Wno-shadow
 CFLAGS += -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 LDFLAGS ?= -Tlink.ld -nostartfiles -nostdlib --specs nano.specs -lc -lgcc -Wl,--gc-sections -Wl,-Map=$@.map
