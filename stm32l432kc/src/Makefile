@@ -1,14 +1,8 @@
-CFLAGS ?= -W -Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -Wformat-truncation -fno-common
-CFLAGS += -g3 -Os -ffunction-sections -fdata-sections -Wno-shadow
+CFLAGS ?= -W -Wall -Wextra -Wundef -Wshadow -Wdouble-promotion -Wformat-truncation 
+CFLAGS += -g3 -Os -fno-common -ffunction-sections -fdata-sections -Wno-shadow
 CFLAGS += -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 LDFLAGS ?= -Tlink.ld -nostartfiles -nostdlib --specs nano.specs -lc -lgcc -Wl,--gc-sections -Wl,-Map=$@.map
-SOURCES = main.c
-
-ifeq ($(OS),Windows_NT)
-  RM = cmd /C del /Q /F
-else
-  RM = rm -rf
-endif
+SOURCES = hal.c main.c
 
 build: firmware.bin
 
@@ -23,3 +17,6 @@ flash: firmware.bin
 
 clean:
 	$(RM) firmware.*
+
+format:
+	clang-format -Werror --style="{BasedOnStyle: llvm, IndentWidth: 4}" -i *.c *.h
