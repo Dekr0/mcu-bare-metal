@@ -9,7 +9,6 @@ MEMORY {
 }
 
 _estack = ORIGIN(sram) + LENGTH(sram);
-_eflash = ORIGIN(flash) + LENGTH(flash);
 
 SECTIONS {
     .vectors : { KEEP(*(.isr_vectors)) }  > flash
