@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - "-I../../cmsis_device_l4/Include"
+    - "-I../../CMSIS_5/CMSIS/Core/Include"
