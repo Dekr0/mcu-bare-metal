@@ -8,8 +8,9 @@ void spin(volatile int32_t count) {
 
 int main() {
     /** Enable clock for GPIOA */
-    RCC->AHB2ENR &= ~(0b1 << RCC_AHB2ENR_GPIOAEN_Pos);
-    RCC->AHB2ENR |= 0b1 << RCC_AHB2ENR_GPIOAEN_Pos;
+    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
+    // RCC->AHB2ENR &= ~(0b1 << RCC_AHB2ENR_GPIOAEN_Pos);
+    // RCC->AHB2ENR |= 0b1 << RCC_AHB2ENR_GPIOAEN_Pos;
 
     /** Set PA2 (TX) to AF */
     GPIOA->MODER &= ~(0b11 << GPIO_MODER_MODE2_Pos);
@@ -27,14 +28,19 @@ int main() {
     GPIOA->AFR[1] |= 0b0011 << GPIO_AFRH_AFSEL15_Pos;
 
     /** Enable clock for USART2 */
-    RCC->APB1ENR1 &= ~(0b1 << RCC_APB1ENR1_USART2EN_Pos);
-    RCC->APB1ENR1 |= 0b1 << RCC_APB1ENR1_USART2EN_Pos;
+    RCC->APB1ENR1 |= RCC_APB1ENR1_USART2EN;
+    // RCC->APB1ENR1 &= ~(0b1 << RCC_APB1ENR1_USART2EN_Pos);
+    // RCC->APB1ENR1 |= 0b1 << RCC_APB1ENR1_USART2EN_Pos;
 
     USART2->CR1 = 0; // Clear
-    USART2->CR1 |= 0b1 << USART_CR1_UE_Pos; // Enable UE
-    USART2->CR1 |= 0b1 << USART_CR1_RE_Pos; // Enable RE
-    USART2->CR1 |= 0b1 << USART_CR1_TE_Pos; // Enable TE
+    USART2->CR1 |= USART_CR1_UE;
+    USART2->CR1 |= USART_CR1_RE;
+    USART2->CR1 |= USART_CR1_TE;
+    // USART2->CR1 |= 0b1 << USART_CR1_UE_Pos; // Enable UE
+    // USART2->CR1 |= 0b1 << USART_CR1_RE_Pos; // Enable RE
+    // USART2->CR1 |= 0b1 << USART_CR1_TE_Pos; // Enable TE
     USART2->BRR = 4000000 / 9600;
+    // USART2->BRR = 4000000 / 9600;
 
     for (;;) {
         spin(0xffff);
